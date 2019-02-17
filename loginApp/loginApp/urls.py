@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .view import loginPage
+from .view import login
+from .view import home
+from django.conf.urls import url,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', loginPage),
-    path('', loginPage),
+    url(r'^login/$', login, name='login'),
+    url(r'^$', home, name='home'),
+    url(r'^auth/', include('social_django.urls', namespace='social')),
 ]
